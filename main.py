@@ -11,7 +11,8 @@ dataset.description()
 dataset.show_image_pca()
 
 my_autoencoder = Autoencoder(latent_dimensions=10)
-my_autoencoder.train(dataset, 20)
+my_autoencoder.train(dataset, 100)
+my_autoencoder.show_loss_trajectory()
 
 denoised_image = my_autoencoder.transform(dataset[0])
 denoised_image.show()
