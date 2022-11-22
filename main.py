@@ -10,7 +10,7 @@ dataset = Image_Collection(file_path=path_mnist_trainig, x_dimension=28, y_dimen
 dataset.description()
 
 my_autoencoder = Autoencoder(latent_dimensions=10)
-my_autoencoder.train(dataset, 100)
+my_autoencoder.train(dataset, 20)
 
 denoised_image = my_autoencoder.transform(dataset.image_tensors[0])
 denoised_image.show()
