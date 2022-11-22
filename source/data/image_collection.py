@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 
 from source.data.image import Image
 
@@ -29,6 +30,7 @@ class Image_Collection:
         
         images = []
         labels = []
+        np_images = []
         for line in f[1:]:
             new_line = [float(i) for i in line.split(",")]
             images.append(
@@ -37,9 +39,13 @@ class Image_Collection:
                       dimensions=(self.x_dim, self.y_dim))
                 )
             labels.append(new_line[0])
+            # this is used for the pca data structure
+            np_images.append(new_line[1:])
         
         self.images = images
+        self.labels = labels
         self.n_labels = len(set(labels))
+        self.np_images = np.array(np_images)
     
     def __len__(self):
         return len(self.images)
@@ -66,4 +72,29 @@ class Image_Collection:
         plt.title(f"Number: {label}", weight="bold", fontsize=16)
         plt.axis("off")
         plt.gray()
+        plt.show()
+    
+    def show_image_pca(self):
+        pca_model = PCA(n_components=self.n_labels)
+        # do standarization
+        pcs = pca_model.fit_transform(self.np_images)
+        eigenvalue_ratio = pca_model.explained_variance_ratio_
+
+        pc_dict = {}
+        for i in range(pcs.shape[0]):
+            if self.labels[i] in pc_dict.keys():
+                pc_dict[self.labels[i]].append(pcs[i, :])
+            else:
+                pc_dict[self.labels[i]] = [pcs[i, :]]
+        
+        pc_dict = {i: np.array(pc_dict[i]) for i in pc_dict}
+
+        plt.figure(figsize=(10, 7))
+        for i in pc_dict:
+            plt.scatter(pc_dict[i][:, 0], pc_dict[i][:, 1], label=str(i), edgecolors="black")
+        
+        plt.title("PCA visualization")
+        plt.xlabel(f"PC-1, {eigenvalue_ratio[0]*100:.2f}%")
+        plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%")
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()
