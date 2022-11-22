@@ -1,5 +1,5 @@
 from source.data.image_collection import Image_Collection
-from source.autoencoder.network import Autoencoder
+from source.autoencoder.autoencoder import Autoencoder
 
 
 # data input
