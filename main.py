@@ -8,6 +8,7 @@ path_mnist_trainig = "/Users/ljb416/Desktop/projects/datasets/mnist/mnist_train_
 #  
 dataset = Image_Collection(file_path=path_mnist_trainig, x_dimension=28, y_dimension=28)
 dataset.description()
+dataset.show_image_pca()
 
 my_autoencoder = Autoencoder(latent_dimensions=10)
 my_autoencoder.train(dataset, 20)
