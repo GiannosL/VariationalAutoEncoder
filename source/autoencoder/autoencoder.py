@@ -10,8 +10,8 @@ class Autoencoder:
     def train(self, data: Image_Collection, n_epochs: int):
         optimizer = torch.optim.Adam(self.model.parameters())
         for epoch in range(n_epochs):
-            for i in range(0, data.n_images):
-                X = data.image_tensors[i]
+            for i in range(0, len(data)):
+                X = data[i]
 
                 optimizer.zero_grad()
                 # NEED TO MAKE INTO TENSORS
@@ -21,7 +21,6 @@ class Autoencoder:
                 loss.backward()
                 optimizer.step()
     
-    def transform(self, x):
+    def transform(self, x, label="Unknown"):
         prediction = self.model.forward(x)
-
-        return Image(prediction.detach().numpy(), 28, 28)
+        return Image(prediction.detach().numpy(), label, (28, 28))
