@@ -10,15 +10,12 @@ class Image_Collection:
         # collect filepath information
         self.file_path = file_path
 
-        #
+        # image dimensions
         self.x_dim = x_dimension
         self.y_dim = y_dimension
 
         # read_image file
         self.read_csv()
-
-        #
-        self.n_pixels = self.images[0].n_pixels
     
     def read_csv(self):
         """
@@ -30,28 +27,17 @@ class Image_Collection:
         
         images = []
         labels = []
-        np_images = []
         for line in f[1:]:
             new_line = [float(i) for i in line.split(",")]
-            images.append(
-                Image(torch.FloatTensor(new_line[1:]), 
-                      label=torch.LongTensor([new_line[0]]), 
-                      dimensions=(self.x_dim, self.y_dim))
-                )
+            #images.append( Image(torch.FloatTensor(new_line[1:]), label=torch.LongTensor([new_line[0]]), dimensions=(self.x_dim, self.y_dim)) )
             labels.append(new_line[0])
             # this is used for the pca data structure
-            np_images.append(new_line[1:])
+            images.append(new_line[1:])
         
-        self.images = images
         self.labels = labels
+        self.images = np.array(images)
         self.n_labels = len(set(labels))
-        self.np_images = np.array(np_images)
-    
-    def __len__(self):
-        return len(self.images)
-    
-    def __getitem__(self, img_index):
-        return self.images[img_index].contents
+        self.n_pixels = self.images[0].shape[0]
 
     def description(self):
         print("\n---------------------------------------------------------")
@@ -77,7 +63,7 @@ class Image_Collection:
     def show_image_pca(self):
         pca_model = PCA(n_components=self.n_labels)
         # do standarization
-        pcs = pca_model.fit_transform(self.np_images)
+        pcs = pca_model.fit_transform(self.images)
         eigenvalue_ratio = pca_model.explained_variance_ratio_
 
         pc_dict = {}
@@ -98,3 +84,6 @@ class Image_Collection:
         plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%")
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()
+
+    def __len__(self):
+        return len(self.images)
