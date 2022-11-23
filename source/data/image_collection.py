@@ -76,9 +76,9 @@ class Image_Collection:
         for i in pc_dict:
             plt.scatter(pc_dict[i][:, 0], pc_dict[i][:, 1], label=str(i), edgecolors="black")
         
-        plt.title("PCA visualization")
-        plt.xlabel(f"PC-1, {eigenvalue_ratio[0]*100:.2f}%")
-        plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%")
+        plt.title("PCA visualization", weight="bold", fontsize=16)
+        plt.xlabel(f"PC-1, {eigenvalue_ratio[0]*100:.2f}%", fontsize=12)
+        plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%", fontsize=12)
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()
         plt.close("all")
