@@ -8,11 +8,13 @@ path_mnist_trainig = "/Users/ljb416/Desktop/projects/datasets/mnist/mnist_train_
 #  
 dataset = Image_Collection(file_path=path_mnist_trainig, x_dimension=28, y_dimension=28)
 dataset.description()
-dataset.show_image_pca()
 
 my_autoencoder = Autoencoder(latent_dimensions=10)
-my_autoencoder.train(dataset, 100)
-my_autoencoder.show_loss_trajectory()
+my_autoencoder.train(dataset, 10)
 
 denoised_image = my_autoencoder.transform(dataset.images[0])
+
+#
+dataset.show_image_pca()
+dataset.show_class_distribution()
 denoised_image.show()
