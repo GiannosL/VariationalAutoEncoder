@@ -3,10 +3,13 @@ import matplotlib.pyplot as plt
 
 
 class Image:
-    def __init__(self, flat_contents, label, dimensions: tuple):
+    def __init__(self, flat_contents, label, 
+                 latent_space, dimensions: tuple):
         self.x_dims = dimensions[0]
         self.y_dims = dimensions[1]
 
+        self.z = latent_space
+        
         self.contents = flat_contents
         self.label = label
 

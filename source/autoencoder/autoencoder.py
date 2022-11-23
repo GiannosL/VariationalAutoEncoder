@@ -34,5 +34,7 @@ class Autoencoder:
     
     def transform(self, x, label="Unknown"):
         x = torch.FloatTensor(x)
-        prediction = self.model.forward(x)
-        return Image(prediction.detach().numpy(), label, (28, 28))
+        
+        prediction, latent_space = self.model.prediction(x)
+        return Image(prediction.detach().numpy(), label, 
+                     dimensions=(28, 28), latent_space=latent_space)
