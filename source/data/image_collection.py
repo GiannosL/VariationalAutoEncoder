@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
-from source.data.image import Image
 
 class Image_Collection:
     def __init__(self, file_path:str, x_dimension:int, y_dimension:int):
@@ -29,7 +28,6 @@ class Image_Collection:
         labels = []
         for line in f[1:]:
             new_line = [float(i) for i in line.split(",")]
-            #images.append( Image(torch.FloatTensor(new_line[1:]), label=torch.LongTensor([new_line[0]]), dimensions=(self.x_dim, self.y_dim)) )
             labels.append(new_line[0])
             # this is used for the pca data structure
             images.append(new_line[1:])
@@ -83,6 +81,30 @@ class Image_Collection:
         plt.xlabel(f"PC-1, {eigenvalue_ratio[0]*100:.2f}%")
         plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%")
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.show()
+        plt.close("all")
+    
+    def show_class_distribution(self):
+        label_dict = {}
+        for lab in self.labels:
+            if lab in label_dict.keys():
+                label_dict[lab] += 1
+            else:
+                label_dict[lab] = 1
+        
+        labels = []
+        lab_vals = []
+        for k in label_dict:
+            labels.append(k)
+            lab_vals.append(label_dict[k])
+        
+        plt.figure(figsize=(10, 7))
+        plt.bar(labels, lab_vals, edgecolor="black", color="gray")
+        plt.xticks(range(len(labels)), labels)
+
+        plt.title("Distribution of classes in data", weight="bold", fontsize=16)
+        plt.xlabel("Classes", fontsize=12)
+        plt.ylabel("Sample count", fontsize=12)
         plt.show()
 
     def __len__(self):
