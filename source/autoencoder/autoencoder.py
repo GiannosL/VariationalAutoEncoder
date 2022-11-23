@@ -15,9 +15,10 @@ class Autoencoder:
     def train(self, data: Image_Collection, n_epochs: int):
         training_loss = []
         optimizer = torch.optim.Adam(self.model.parameters())
-        X = torch.FloatTensor(data.np_images)
+        X = torch.FloatTensor(data.images)
 
         for epoch in range(n_epochs):
+
             optimizer.zero_grad()
             
             X_hat = self.model(X)
@@ -31,6 +32,7 @@ class Autoencoder:
         self.training_loss = tuple(training_loss)
     
     def transform(self, x, label="Unknown"):
+        x = torch.FloatTensor(x)
         prediction = self.model.forward(x)
         return Image(prediction.detach().numpy(), label, (28, 28))
     

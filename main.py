@@ -14,5 +14,5 @@ my_autoencoder = Autoencoder(latent_dimensions=10)
 my_autoencoder.train(dataset, 100)
 my_autoencoder.show_loss_trajectory()
 
-denoised_image = my_autoencoder.transform(dataset[0])
+denoised_image = my_autoencoder.transform(dataset.images[0])
 denoised_image.show()
