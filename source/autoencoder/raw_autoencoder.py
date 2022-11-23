@@ -13,4 +13,7 @@ class Raw_Autoencoder(nn.Module):
     def forward(self, x):
         z = self.encoder(x)
         return self.decoder(z)
-
+    
+    def prediction(self, x):
+        z = self.encoder(x)
+        return self.decoder(z), z
