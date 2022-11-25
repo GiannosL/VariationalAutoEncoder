@@ -12,3 +12,11 @@
     <li>Make my VAE work universally on datasets</li>
     <li>Make my VAE able to act both as a tool using <em>main.py</em> and as a package by importing it in another python script</li>
 </ul>
+
+<h2>AutoEncoder</h2>
+<p>
+    Autoencoders are a special kind of neural network used to perform dimensionality reduction. We can think of autoencoders as 
+    being composed by two networks, an encoder <em>e</em> and a decoder <em>d</em>. The autoencoder is trained to minimize 
+    the difference between the input and the reconstruction using a kind of <em><strong>reconstruction loss</strong></em>. Because 
+    the autoencoder is trained as a "whole" meaning that the encoder and decoder are trained at the same time.
+</p>
