@@ -2,17 +2,17 @@ import torch
 
 from source.data.image import Image
 from source.data.image_collection import Image_Collection
-from source.autoencoder.raw_variational_autoencoder import VariationalAutoEncoder
+from source.autoencoder.raw_variational_autoencoder import RawVariationalAutoEncoder
 
 
-class Variational_AutoEncoder:
+class VariationalAutoEncoder:
     def __init__(self, latent_dimensions):
-        self.model = VariationalAutoEncoder(latent_space_dimensions=latent_dimensions)
+        self.model = RawVariationalAutoEncoder(latent_space_dimensions=latent_dimensions)
     
     def train(self, data: Image_Collection, epochs: int, batch_size: int):
         #
         opt = torch.optim.Adam(self.model.parameters())
-        data = self.mini_batch_split(data, batch_size)
+        data = self.mini_batch_split(data.images, batch_size)
 
         for epoch in range(epochs):
             for x in data:
@@ -36,6 +36,6 @@ class Variational_AutoEncoder:
     def transform(self, x, label="Unknown"):
         x = torch.FloatTensor(x)
         
-        prediction, latent_space = self.model.prediction(x)
+        prediction, latent_space = self.model.predict(x)
         return Image(prediction.detach().numpy(), label, 
                      dimensions=(28, 28), latent_space=latent_space)

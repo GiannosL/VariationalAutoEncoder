@@ -11,8 +11,8 @@ class VariationalEncoder(nn.Module):
         self.linear3 = nn.Linear(512, latent_space_dimensions)
 
         self.N = torch.distributions.Normal(0, 1)
-        self.N.loc = self.N.loc.cuda()
-        self.N.scale = self.N.scale.cuda()
+        self.N.loc = self.N.loc
+        self.N.scale = self.N.scale
         self.kl = 0
     
     def forward(self, x):

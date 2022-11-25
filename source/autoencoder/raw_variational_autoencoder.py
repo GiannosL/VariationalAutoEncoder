@@ -1,12 +1,12 @@
 import torch.nn as nn
 
-from decoder import Decoder
-from variational_encoder import VariationalEncoder
+from source.autoencoder.decoder import Decoder
+from source.autoencoder.variational_encoder import VariationalEncoder
 
 
-class VariationalAutoEncoder(nn.Module):
+class RawVariationalAutoEncoder(nn.Module):
     def __init__(self, latent_space_dimensions):
-        super(VariationalAutoEncoder, self).__init__()
+        super(RawVariationalAutoEncoder, self).__init__()
 
         self.encoder = VariationalEncoder(latent_space_dimensions)
         self.decoder = Decoder(latent_space_dimensions)
