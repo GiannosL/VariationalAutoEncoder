@@ -12,9 +12,12 @@ class Autoencoder:
         self.training_loss = None
         self.n_epochs = None
 
-    def train(self, data: Image_Collection, n_epochs: int):
+    def train(self, data: Image_Collection, n_epochs: int, batch_size: int):
+        # best optimizer for images is adam
         optimizer = torch.optim.Adam(self.model.parameters())
-        X = torch.FloatTensor(data.images)
+
+        # conver images to tensor
+        X = self.mini_batch_split(data.images, batch_size)
 
         for epoch in range(n_epochs):
             if epoch % 2 == 0:
@@ -31,6 +34,17 @@ class Autoencoder:
                 optimizer.step()
         
         self.n_epochs = n_epochs
+
+    def mini_batch_split(self, X, batch_size):
+        X = torch.FloatTensor(X)
+
+        # split data in batches
+        batches = []
+        step = X.shape[0] // batch_size
+        for i in range(0, X.shape[0], step):
+            batches.append(X[i:i+step, :])
+        
+        return batches
     
     def transform(self, x, label="Unknown"):
         x = torch.FloatTensor(x)

@@ -9,7 +9,7 @@ dataset.description()
 
 # train autoencoder
 my_autoencoder = Autoencoder(latent_dimensions=2)
-my_autoencoder.train(dataset, 100)
+my_autoencoder.train(data=dataset, n_epochs=10, batch_size=50)
 
 # make predictions
 images_list = []
