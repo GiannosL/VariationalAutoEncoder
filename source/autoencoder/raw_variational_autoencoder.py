@@ -17,4 +17,4 @@ class VariationalAutoEncoder(nn.Module):
     
     def predict(self, x):
         z = self.encoder(x)
-        return self.decoder(z), z
+        return self.decoder(z), z.detach().numpy()
