@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 from source.autoencoder.encoder import Encoder
@@ -16,4 +15,4 @@ class Raw_Autoencoder(nn.Module):
     
     def prediction(self, x):
         z = self.encoder(x)
-        return self.decoder(z), z
+        return self.decoder(z), z.detach().numpy()
