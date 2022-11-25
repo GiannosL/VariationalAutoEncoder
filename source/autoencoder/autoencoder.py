@@ -1,5 +1,4 @@
 import torch
-import matplotlib.pyplot as plt
 
 from source.data.image import Image
 from source.data.image_collection import Image_Collection
