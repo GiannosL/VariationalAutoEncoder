@@ -15,6 +15,9 @@ class VariationalAutoEncoder:
         data = self.mini_batch_split(data.images, batch_size)
 
         for epoch in range(epochs):
+            if epoch % 2 == 0:
+                print(f"Epoch: {epoch}")
+            
             for x in data:
                 opt.zero_grad()
                 x_hat = self.model(x)
@@ -36,6 +39,7 @@ class VariationalAutoEncoder:
     def transform(self, x, label="Unknown"):
         x = torch.FloatTensor(x)
         
-        prediction, latent_space = self.model.predict(x)
+        prediction, latent_space = self.model.prediction(x)
+        print(prediction)
         return Image(prediction.detach().numpy(), label, 
                      dimensions=(28, 28), latent_space=latent_space)

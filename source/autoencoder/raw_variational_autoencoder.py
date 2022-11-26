@@ -15,6 +15,6 @@ class RawVariationalAutoEncoder(nn.Module):
         z = self.encoder(x)
         return self.decoder(z)
     
-    def predict(self, x):
+    def prediction(self, x):
         z = self.encoder(x)
         return self.decoder(z), z.detach().numpy()
