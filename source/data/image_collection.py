@@ -46,7 +46,7 @@ class Image_Collection:
     def show_image(self, image_index: int):
         if not self.y_dim:
             raise Exception("You have to set image dimensions first")
-        
+
         image = self.image_data[image_index].reshape((self.x_dim, self.y_dim))
         label = self.image_labels[image_index]
 
@@ -56,7 +56,7 @@ class Image_Collection:
         plt.axis("off")
         plt.gray()
         plt.show()
-    
+
     def show_image_pca(self):
         pca_model = PCA(n_components=self.n_labels)
         # do standarization
@@ -81,8 +81,7 @@ class Image_Collection:
         plt.ylabel(f"PC-2, {eigenvalue_ratio[1]*100:.2f}%", fontsize=12)
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()
-        plt.close("all")
-    
+
     def show_class_distribution(self):
         label_dict = {}
         for lab in self.labels:

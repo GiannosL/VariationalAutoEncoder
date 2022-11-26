@@ -14,6 +14,7 @@ def plot_2D_latent(image_list):
     for key in labels_z:
         labels.append(key)
         z_dims.append(labels_z[key])
+        #print(key, labels_z[key])
     
     plt.figure(figsize=(10, 7))
     for i in range(len(labels)):
