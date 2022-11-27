@@ -20,3 +20,11 @@
     the difference between the input and the reconstruction using a kind of <em><strong>reconstruction loss</strong></em>. Because 
     the autoencoder is trained as a "whole" meaning that the encoder and decoder are trained at the same time.
 </p>
+
+<h2>Variational Autonecoders</h2>
+<p>
+    A variational autoencoder is an autoencoder whose training is regularized to avoid overfitting. It ensures that the 
+    latent space captures properties of the data that are important during the generative process. This is achieved by
+    modifying the encoding process. Instead of encoding to a single point (like AEs do), a VAE will encode the original 
+    dataset into a distribution over the latent space.
+</p>
