@@ -1,9 +1,6 @@
 import torch
 import torch.nn as nn
 
-from source.autoencoder.decoder import Decoder
-from source.autoencoder.variational_encoder import VariationalEncoder
-
 
 class RawVariationalAutoEncoder(nn.Module):
     def __init__(self, latent_space_dimensions):
