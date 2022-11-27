@@ -21,7 +21,7 @@ class VariationalAutoEncoder:
             for x in data:
                 opt.zero_grad()
                 x_hat = self.model(x)
-                loss = ((x - x_hat)**2).sum() + self.model.encoder.kl
+                loss = ((x - x_hat)**2).sum() + self.model.kl
                 loss.backward()
                 opt.step()
 
