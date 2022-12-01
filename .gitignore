@@ -1,2 +1,4 @@
 data/
 .DS_store
+source/autoencoder/__pycache__/
+source/variational_autoencoder/__pycache__/
