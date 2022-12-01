@@ -21,7 +21,7 @@ class AE:
             if (epoch % 5 == 0) and (verbose):
                 print(f"Epoch {epoch}")
             
-            for batch, y in data:
+            for batch, labels in data:
                 self.optimizer.zero_grad()
                 x_hat = self.model(batch)
 
@@ -30,14 +30,14 @@ class AE:
                 
                 self.optimizer.step()
     
-    def plot_latent(self, data, y) -> None:
+    def plot_latent(self, data) -> None:
         """
         plot the two dimensional latent space
         """
-        for i, (x, y) in enumerate(data):
-            z = self.model.encoder(x)
+        for i, (batch, labels) in enumerate(data):
+            z = self.model.encoder(batch)
             z = z.detach().numpy()
-            plt.scatter(z[:, 0], z[:, 1], c=y[i], cmap="tab10", edgecolors="black")
+            plt.scatter(z[:, 0], z[:, 1], c=labels, cmap="tab10", edgecolors="black")
             if i > 100:
                 plt.colorbar()
                 plt.show()
