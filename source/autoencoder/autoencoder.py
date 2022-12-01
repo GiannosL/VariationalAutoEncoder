@@ -9,7 +9,7 @@ class AE:
         # set latent dimensions for the model
         self.n_latent_dimensions = n_latent_dimensions
         # create the autoencoder
-        self.model = AE(latent_dims=self.n_latent_dimensions)
+        self.model = Autoencoder_Model(latent_dims=self.n_latent_dimensions)
         # set the model's optimizer
         self.optimizer = torch.optim.Adam(self.model.parameters())
     
