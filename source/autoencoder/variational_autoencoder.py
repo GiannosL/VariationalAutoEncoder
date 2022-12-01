@@ -6,10 +6,10 @@ from source.autoencoder.raw_variational_autoencoder import RawVariationalAutoEnc
 
 
 class VariationalAutoEncoder:
-    def __init__(self, latent_dimensions):
+    def __init__(self, latent_dimensions) -> None:
         self.model = RawVariationalAutoEncoder(latent_space_dimensions=latent_dimensions)
     
-    def train(self, data: Image_Collection, epochs: int, batch_size: int):
+    def train(self, data: Image_Collection, epochs: int, batch_size: int) -> None:
         #
         opt = torch.optim.Adam(self.model.parameters())
         data = self.mini_batch_split(data.images, batch_size)
@@ -25,7 +25,7 @@ class VariationalAutoEncoder:
                 loss.backward()
                 opt.step()
 
-    def mini_batch_split(self, X, batch_size):
+    def mini_batch_split(self, X, batch_size) -> list:
         X = torch.FloatTensor(X)
 
         # split data in batches
@@ -36,7 +36,7 @@ class VariationalAutoEncoder:
         
         return batches
 
-    def transform(self, x, label="Unknown"):
+    def transform(self, x, label="Unknown") -> Image:
         x = torch.FloatTensor(x)
         
         prediction, latent_space = self.model.prediction(x)
