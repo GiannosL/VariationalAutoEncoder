@@ -1,3 +1,2 @@
-source/autoencoder/__pycache__/
-source/data/__pycache__/
+data/
 .DS_store
