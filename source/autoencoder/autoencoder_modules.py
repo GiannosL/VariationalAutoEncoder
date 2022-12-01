@@ -16,7 +16,7 @@ class Encoder(nn.Module):
 
 
 class Decoder(nn.Module):
-    def __init__(self, latent_dims):
+    def __init__(self, latent_dims:int):
         super(Decoder, self).__init__()
         self.linear1 = nn.Linear(latent_dims, 512)
         self.linear2 = nn.Linear(512, 784)
@@ -28,7 +28,7 @@ class Decoder(nn.Module):
 
 
 class Autoencoder_Model(nn.Module):
-    def __init__(self, latent_dims):
+    def __init__(self, latent_dims:int):
         super(Autoencoder_Model, self).__init__()
         self.encoder = Encoder(latent_dims)
         self.decoder = Decoder(latent_dims)

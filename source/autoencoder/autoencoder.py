@@ -5,7 +5,7 @@ from source.autoencoder.autoencoder import Autoencoder_Model
 
 
 class AE:
-    def __init__(self, n_latent_dimensions) -> None:
+    def __init__(self, n_latent_dimensions:int) -> None:
         # set latent dimensions for the model
         self.n_latent_dimensions = n_latent_dimensions
         # create the autoencoder
