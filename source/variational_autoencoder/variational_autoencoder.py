@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from source.variational_autoencoder.variational_autoencoder_modules import Variational_Autoencoder_Model
 
 
-class VariationalAutoencoder:
+class VAE:
     def __init__(self, n_latent_dimensions:int) -> None:
         self.n_latent_dimensions = n_latent_dimensions
 
