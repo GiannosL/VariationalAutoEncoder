@@ -21,7 +21,7 @@ class AE:
             if (epoch % 5 == 0) and (verbose):
                 print(f"Epoch {epoch}")
             
-            for batch, labels in data:
+            for batch, _ in data:
                 self.optimizer.zero_grad()
                 x_hat = self.model(batch)
 
