@@ -1,7 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
 
-from source.autoencoder.autoencoder import Autoencoder_Model
+from source.autoencoder.autoencoder_modules import Autoencoder_Model
 
 
 class AE:
@@ -21,7 +21,7 @@ class AE:
             if (epoch % 5 == 0) and (verbose):
                 print(f"Epoch {epoch}")
             
-            for batch in data:
+            for batch, y in data:
                 self.optimizer.zero_grad()
                 x_hat = self.model(batch)
 
@@ -34,7 +34,7 @@ class AE:
         """
         plot the two dimensional latent space
         """
-        for i, x in enumerate(data):
+        for i, (x, y) in enumerate(data):
             z = self.model.encoder(x)
             z = z.detach().numpy()
             plt.scatter(z[:, 0], z[:, 1], c=y[i], cmap="tab10", edgecolors="black")
