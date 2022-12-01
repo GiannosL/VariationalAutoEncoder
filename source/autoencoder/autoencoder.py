@@ -34,12 +34,17 @@ class AE:
         """
         plot the two dimensional latent space
         """
+        plt.figure(figsize=(10, 7))
+
         for i, (batch, labels) in enumerate(data):
             z = self.model.encoder(batch)
             z = z.detach().numpy()
             plt.scatter(z[:, 0], z[:, 1], c=labels, cmap="tab10", edgecolors="black")
             if i > 100:
                 plt.colorbar()
+                plt.title("Latent space depiction", weight="bold", fontsize=16)
+                plt.xlabel("Dimension 1", fontsize=12)
+                plt.ylabel("Dimension 2", fontsize=12)
                 plt.show()
                 break
 
