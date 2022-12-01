@@ -32,10 +32,10 @@ class RawVariationalAutoEncoder(nn.Module):
     
     def reparameterization(self, z_mu, z_log_var):
         epsilon = torch.randn(1, 2)
-        z = z_mu + epsilon * torch.exp(z_log_var/2.)
+        z = z_mu + epsilon * torch.exp(z_log_var/2)
         return z
     
-    def prediction(self, x):
+    def prediction(self, x) -> tuple:
         x = self.encoder(x)
         z_mean, z_log_var = self.z_mean(x), self.z_log_var(x)
         z = self.reparameterization(z_mean, z_log_var)
