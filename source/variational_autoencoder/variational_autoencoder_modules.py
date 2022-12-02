@@ -31,7 +31,7 @@ class Variational_Autoencoder_Model(nn.Module):
     def __init__(self, input_dims:int, h1_dims:int, latent_dims:int) -> None:
         super(Variational_Autoencoder_Model, self).__init__()
         self.encoder = VariationalEncoder(input_dims, h1_dims, latent_dims)
-        self.decoder = Decoder(latent_dims)
+        self.decoder = Decoder(input_dims, h1_dims, latent_dims)
 
     def forward(self, x):
         z = self.encoder(x)

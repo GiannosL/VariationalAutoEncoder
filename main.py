@@ -17,7 +17,7 @@ the_autoencoder.train(data=dataset, n_epochs=10, verbose=True)
 
 #
 print("\nTraining Variational AutoEncoder:")
-the_variational_autoencoder = VAE(n_latent_dimensions=2)
+the_variational_autoencoder = VAE(input_nodes=784, h1_nodes=512, n_latent_dimensions=2)
 the_variational_autoencoder.train(data=dataset, epochs=10)
 
 # plot 2D versions of the latent space for AE and VAE
