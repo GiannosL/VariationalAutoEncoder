@@ -12,7 +12,7 @@ dataset = torch.utils.data.DataLoader(torchvision.datasets.MNIST('./data',
 
 # train the autoencoder model
 print("Training AutoEncoder:")
-the_autoencoder = AE(n_latent_dimensions=2)
+the_autoencoder = AE(input_nodes=784, h1_nodes=512, n_latent_dimensions=2)
 the_autoencoder.train(data=dataset, n_epochs=10, verbose=True)
 
 #
