@@ -5,10 +5,12 @@ from source.variational_autoencoder.variational_autoencoder_modules import Varia
 
 
 class VAE:
-    def __init__(self, n_latent_dimensions:int) -> None:
+    def __init__(self, input_nodes:int, h1_nodes:int, n_latent_dimensions:int) -> None:
         self.n_latent_dimensions = n_latent_dimensions
 
-        self.model = Variational_Autoencoder_Model(latent_dims=self.n_latent_dimensions)
+        self.model = Variational_Autoencoder_Model(input_dims=input_nodes, 
+                                                   h1_dims=h1_nodes,
+                                                   latent_dims=self.n_latent_dimensions)
 
         self.optimizer = torch.optim.Adam(self.model.parameters())
 

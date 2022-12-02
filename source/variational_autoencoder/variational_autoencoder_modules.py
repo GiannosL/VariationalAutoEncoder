@@ -6,11 +6,11 @@ from source.autoencoder.autoencoder_modules import Decoder
 
 
 class VariationalEncoder(nn.Module):
-    def __init__(self, latent_dims:int) -> None:
+    def __init__(self, input_dims:int, h1_dims:int, latent_dims:int) -> None:
         super(VariationalEncoder, self).__init__()
-        self.linear1 = nn.Linear(784, 512)
-        self.linear2 = nn.Linear(512, latent_dims)
-        self.linear3 = nn.Linear(512, latent_dims)
+        self.linear1 = nn.Linear(input_dims, h1_dims)
+        self.linear2 = nn.Linear(h1_dims, latent_dims)
+        self.linear3 = nn.Linear(h1_dims, latent_dims)
 
         self.N = torch.distributions.Normal(0, 1)
         self.N.loc = self.N.loc
@@ -28,9 +28,9 @@ class VariationalEncoder(nn.Module):
 
 
 class Variational_Autoencoder_Model(nn.Module):
-    def __init__(self, latent_dims:int) -> None:
+    def __init__(self, input_dims:int, h1_dims:int, latent_dims:int) -> None:
         super(Variational_Autoencoder_Model, self).__init__()
-        self.encoder = VariationalEncoder(latent_dims)
+        self.encoder = VariationalEncoder(input_dims, h1_dims, latent_dims)
         self.decoder = Decoder(latent_dims)
 
     def forward(self, x):
