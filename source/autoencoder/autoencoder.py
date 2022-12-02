@@ -5,11 +5,13 @@ from source.autoencoder.autoencoder_modules import Autoencoder_Model
 
 
 class AE:
-    def __init__(self, n_latent_dimensions:int) -> None:
+    def __init__(self, input_nodes:int, h1_nodes:int, n_latent_dimensions:int) -> None:
         # set latent dimensions for the model
         self.n_latent_dimensions = n_latent_dimensions
         # create the autoencoder
-        self.model = Autoencoder_Model(latent_dims=self.n_latent_dimensions)
+        self.model = Autoencoder_Model(input_dims=input_nodes,
+                                       h1_dims=h1_nodes, 
+                                       latent_dims=self.n_latent_dimensions)
         # set the model's optimizer
         self.optimizer = torch.optim.Adam(self.model.parameters())
     

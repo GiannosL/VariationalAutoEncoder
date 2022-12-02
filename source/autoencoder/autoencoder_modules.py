@@ -4,10 +4,10 @@ import torch.nn.functional as F
 
 
 class Encoder(nn.Module):
-    def __init__(self, latent_dims:int) -> None:
+    def __init__(self, input_dims:int, h1_dims:int, latent_dims:int) -> None:
         super(Encoder, self).__init__()
-        self.linear1 = nn.Linear(784, 512)
-        self.linear2 = nn.Linear(512, latent_dims)
+        self.linear1 = nn.Linear(input_dims, h1_dims)
+        self.linear2 = nn.Linear(h1_dims, latent_dims)
 
     def forward(self, x):
         x = torch.flatten(x, start_dim=1)
@@ -16,10 +16,10 @@ class Encoder(nn.Module):
 
 
 class Decoder(nn.Module):
-    def __init__(self, latent_dims:int):
+    def __init__(self, input_dims:int, h1_dims:int, latent_dims:int):
         super(Decoder, self).__init__()
-        self.linear1 = nn.Linear(latent_dims, 512)
-        self.linear2 = nn.Linear(512, 784)
+        self.linear1 = nn.Linear(latent_dims, h1_dims)
+        self.linear2 = nn.Linear(h1_dims, input_dims)
 
     def forward(self, z):
         z = F.relu(self.linear1(z))
@@ -28,10 +28,10 @@ class Decoder(nn.Module):
 
 
 class Autoencoder_Model(nn.Module):
-    def __init__(self, latent_dims:int):
+    def __init__(self, input_dims:int, h1_dims:int, latent_dims:int):
         super(Autoencoder_Model, self).__init__()
-        self.encoder = Encoder(latent_dims)
-        self.decoder = Decoder(latent_dims)
+        self.encoder = Encoder(input_dims, h1_dims, latent_dims)
+        self.decoder = Decoder(input_dims, h1_dims, latent_dims)
 
     def forward(self, x):
         z = self.encoder(x)
